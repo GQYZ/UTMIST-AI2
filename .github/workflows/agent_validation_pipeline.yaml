@@ -65,10 +65,10 @@ jobs:
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
-          set -e
-          python -V
-          pip -V
+          cd submission
+          export PYTHONPATH=$(pwd)
           pytest -s user/validate.py
+
 
       # === Step 4: Upload results as an artifact ===
       - name: Upload Results
@@ -122,7 +122,10 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}/submission
           USERNAME: ${{ github.event.inputs.username }}
-        run: pytest -s user/validate.py
+        run: |
+          cd submission
+          export PYTHONPATH=$(pwd)
+          pytest -s user/validate.py
 
       # === Step 4: Upload results as an artifact ===
       - name: Upload Results
