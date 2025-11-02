@@ -65,15 +65,7 @@ jobs:
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
-          echo "=== Debug: List contents ==="
-          ls -R $GITHUB_WORKSPACE
-
-          echo "=== Changing into submission ==="
-          cd submission
-          echo "Now in $(pwd)"
-
-          echo "=== Running pytest in isolated mode ==="
-          PYTHONPATH=$(pwd) python -m pytest -s user/validate.py
+          PYTHONPATH=$(pwd) python user/validate.py
 
       # === Step 4: Upload results as an artifact ===
       - name: Upload Results
@@ -128,8 +120,7 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}/submission
           USERNAME: ${{ github.event.inputs.username }}
         run: |
-          export PYTHONPATH=$(pwd)
-          pytest -s user/validate.py
+          PYTHONPATH=$(pwd) python user/validate.py
 
       # === Step 4: Upload results as an artifact ===
       - name: Upload Results
