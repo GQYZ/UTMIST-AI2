@@ -72,7 +72,7 @@ class SubmittedAgent(Agent):
             
 
     def _gdown(self) -> str:
-        data_path = "rl-model.zip"
+        data_path = "rl-model-2ab96390c7db.zip"
         if not os.path.isfile(data_path):
             print(f"Downloading {data_path}...")
             # Place a link to your PUBLIC model data here. This is where we will download it from on the tournament server.
